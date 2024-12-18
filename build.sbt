@@ -10,3 +10,5 @@ lazy val root = (project in file("."))
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.18" % "test"
 
 Test / testOptions += Tests.Filter(_.equals("wizard.aTestSequence.TestSequence"))
+
+libraryDependencies += "org.scalafx" %% "scalafx" % "23.0.1-R34"

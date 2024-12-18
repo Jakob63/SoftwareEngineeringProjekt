@@ -1,5 +1,7 @@
 package wizard.model.cards
 
+import scalafx.scene.image.Image
+
 enum Color():
     case Red
     case Green
@@ -44,4 +46,13 @@ def valueToAnsi(value: Value): String = value match {
 }
 case class Card(value: Value, color: Color){
     override def toString: String = s"$value of $color"
+
+    def toImage: Image = {
+        val imagePath = s"/wizard/gui/model/PrettyCards/${value.cardType()}_${color.toString}.png"
+        val imageStream = getClass.getResourceAsStream(imagePath)
+        if (imageStream == null) {
+            throw new RuntimeException(s"Image not found: $imagePath")
+        }
+        new Image(imageStream)
+    }
 }
