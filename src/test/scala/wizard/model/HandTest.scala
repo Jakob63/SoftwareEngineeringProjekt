@@ -3,7 +3,7 @@ package wizard.model
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.model.cards.{Card, Color, Hand, Value}
+import wizard.model.model_TUI.cards.{Card, Color, Hand, Value}
 
 class HandTest extends AnyWordSpec with Matchers {
     "Hand" should {

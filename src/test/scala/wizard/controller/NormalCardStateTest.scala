@@ -2,11 +2,11 @@ package wizard.controller
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.model.cards.{Card, Color, Value}
-import wizard.model.player.Player
-import wizard.model.player.PlayerFactory
-import wizard.model.player.PlayerType.Human
-import wizard.model.rounds.Round
+import wizard.controller.controller_TUI.NormalCardState
+import wizard.model.model_TUI.cards.{Card, Color, Value}
+import wizard.model.model_TUI.player.{Player, PlayerFactory}
+import wizard.model.model_TUI.player.PlayerType.Human
+import wizard.model.model_TUI.rounds.Round
 
 class NormalCardStateTest extends AnyWordSpec with Matchers {
 

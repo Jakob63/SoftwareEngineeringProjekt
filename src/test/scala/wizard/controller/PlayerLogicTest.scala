@@ -3,10 +3,9 @@ package wizard.controller
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.model.cards.{Card, Color, Hand, Value}
-import wizard.model.player.Player
-import wizard.model.player.PlayerType.{AI, Human}
-import wizard.model.player.PlayerFactory
+import wizard.model.model_TUI.cards.{Card, Color, Hand, Value}
+import wizard.model.model_TUI.player.{Player, PlayerFactory}
+import wizard.model.model_TUI.player.PlayerType.{AI, Human}
 
 class PlayerLogicTest extends AnyWordSpec with Matchers {
     "PlayerLogic" should {

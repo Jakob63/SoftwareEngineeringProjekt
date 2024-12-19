@@ -1,4 +1,4 @@
-package wizard.model.cards
+package wizard.model.model_TUI.cards
 
 import scala.collection.mutable.ListBuffer
 import wizard.actionmanagement.Observable

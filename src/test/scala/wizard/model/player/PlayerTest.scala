@@ -3,10 +3,9 @@ package wizard.model.player
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.model.cards.Hand
-import wizard.model.player.Player
-import wizard.model.player.PlayerFactory
-import wizard.model.player.PlayerType.Human
+import wizard.model.model_TUI.cards.Hand
+import wizard.model.model_TUI.player.{Player, PlayerFactory}
+import wizard.model.model_TUI.player.PlayerType.Human
 
 class PlayerTest extends AnyWordSpec with Matchers {
     "Player" should {

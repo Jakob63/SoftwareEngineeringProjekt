@@ -1,4 +1,4 @@
-package wizard.model.player
+package wizard.model.model_TUI.player
 
 import scala.compiletime.uninitialized
 

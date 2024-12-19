@@ -2,7 +2,8 @@ package wizard.model.player
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.model.cards.{Card, Color, Hand, Value}
+import wizard.model.model_TUI.cards.{Card, Color, Hand, Value}
+import wizard.model.model_TUI.player.Human
 import wizard.testUtils.TestUtil
 
 class HumanTest extends AnyWordSpec with Matchers {

@@ -1,11 +1,12 @@
-package wizard.controller
+package wizard.controller.controller_TUI
 
-import wizard.aView.TextUI
-import wizard.aView.TextUI.showHand
-import wizard.model.cards.{Card, Color, Dealer, Value}
-import wizard.model.player.Player
-import wizard.model.rounds.Round
+import wizard.aView.aView_TUI.TextUI
+import wizard.aView.aView_TUI.TextUI.showHand
 import wizard.actionmanagement.{Observable, Observer}
+import wizard.controller.controller_TUI.{ChesterCardState, NormalCardState, WizardCardState}
+import wizard.model.model_TUI.cards.{Card, Color, Dealer, Value}
+import wizard.model.model_TUI.player.Player
+import wizard.model.model_TUI.rounds.Round
 
 object RoundLogic extends Observable {
     add(TextUI)

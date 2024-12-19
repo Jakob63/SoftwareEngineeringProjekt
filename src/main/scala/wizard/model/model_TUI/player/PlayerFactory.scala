@@ -1,7 +1,4 @@
-package wizard.model.player
-
-import wizard.model.player.{AI, Human, Player}
-import wizard.model.player.Director
+package wizard.model.model_TUI.player
 
 enum PlayerType:
     case Human, AI

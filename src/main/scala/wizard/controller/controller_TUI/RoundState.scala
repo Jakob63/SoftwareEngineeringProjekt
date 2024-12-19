@@ -1,10 +1,11 @@
-package wizard.controller
+package wizard.controller.controller_TUI
 
-import wizard.aView.TextUI
+import wizard.aView.aView_TUI.TextUI
 import wizard.actionmanagement.{Observable, Observer}
-import wizard.model.cards.{Card, Color, Value}
-import wizard.model.player.Player
-import wizard.model.rounds.Round
+import wizard.controller.controller_TUI.RoundState
+import wizard.model.model_TUI.cards.{Card, Color, Value}
+import wizard.model.model_TUI.player.Player
+import wizard.model.model_TUI.rounds.Round
 
 trait RoundState extends Observable {
     def handleTrump(round: Round, trumpCard: Card, players: List[Player]): Unit
@@ -37,8 +38,14 @@ class WizardCardState extends RoundState {
         val colorCards = colorOptions.map(color => Card(Value.One, color))
 
         // Print color options
-        TextUI.printColorOptions(colorCards)
+        printColorOptions(colorCards)
 
+        def printColorOptions(cards: List[Card]): Unit = {
+            cards.zipWithIndex.foreach { case (card, index) =>
+                println(s"${index + 1}. $card")
+            }
+        }
+        
         val input = TextUI.update("which trump", nextPlayer).asInstanceOf[String]
         val chosenColorIndex = input.toInt - 1
         val chosenColor = colorOptions.lift(chosenColorIndex)

@@ -1,7 +1,7 @@
 package wizard.undo
 
 import org.scalatest.funsuite.AnyFunSuite
-import wizard.model.player.{Player, PlayerFactory, PlayerType}
+import wizard.model.model_TUI.player.{Player, PlayerFactory, PlayerType}
 
 class UndoManagerTest extends AnyFunSuite {
 

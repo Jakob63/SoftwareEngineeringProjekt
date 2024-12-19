@@ -1,9 +1,9 @@
-package wizard.controller
+package wizard.controller.controller_TUI
 
-import wizard.model.cards.{Card, Color, Value}
-import wizard.model.player.Player
-import wizard.aView.TextUI
+import wizard.aView.aView_TUI.TextUI
 import wizard.actionmanagement.{Observable, Observer}
+import wizard.model.model_TUI.cards.{Card, Color, Value}
+import wizard.model.model_TUI.player.Player
 
 object PlayerLogic extends Observable {
     add(TextUI)

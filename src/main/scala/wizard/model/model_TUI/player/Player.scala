@@ -1,8 +1,8 @@
-package wizard.model.player
+package wizard.model.model_TUI.player
 
-import wizard.model.cards.{Card, Color, Hand}
+import wizard.aView.aView_TUI.TextUI
 import wizard.actionmanagement.{Observable, Observer}
-import wizard.aView.TextUI
+import wizard.model.model_TUI.cards.{Card, Color, Hand}
 
 abstract case class Player(var name: String) extends Observable {
     

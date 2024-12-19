@@ -2,8 +2,9 @@ package wizard.model.player
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.model.cards.{Card, Color, Value}
-import wizard.model.player.Director.names
+import wizard.model.model_TUI.cards.{Card, Color, Value}
+import wizard.model.model_TUI.player.{AI, BuildAI}
+import wizard.model.model_TUI.player.Director.names
 
 import scala.util.Random
 

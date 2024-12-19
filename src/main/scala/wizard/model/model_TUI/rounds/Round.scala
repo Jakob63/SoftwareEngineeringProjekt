@@ -1,12 +1,12 @@
-package wizard.model.rounds
+package wizard.model.model_TUI.rounds
 
-import wizard.model.cards.{Card, Color, Dealer, Value}
-import wizard.model.player.Player
+import wizard.aView.aView_TUI.TextUI
 
 import scala.compiletime.uninitialized
-import wizard.controller.RoundState
-import wizard.aView.TextUI
 import wizard.actionmanagement.Observable
+import wizard.controller.controller_TUI.RoundState
+import wizard.model.model_TUI.cards.{Card, Color, Dealer, Value}
+import wizard.model.model_TUI.player.Player
 
 class Round(players: List[Player]) extends Observable {
     // Aktueller Trumpf

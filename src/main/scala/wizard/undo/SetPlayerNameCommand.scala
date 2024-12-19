@@ -1,6 +1,6 @@
 package wizard.undo
 
-import wizard.model.player.Player
+import wizard.model.model_TUI.player.Player
 
 trait Command {
     def doStep(): Unit

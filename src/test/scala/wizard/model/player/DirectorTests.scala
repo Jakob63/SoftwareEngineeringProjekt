@@ -2,6 +2,7 @@ package wizard.model.player
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+import wizard.model.model_TUI.player.{AI, BuildAI, Director}
 
 class DirectorTests extends AnyWordSpec with Matchers {
     "Director" should {

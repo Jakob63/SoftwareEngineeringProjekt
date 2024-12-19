@@ -3,8 +3,8 @@ package wizard.model
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.aView.TextUI.showcard
-import wizard.model.cards.*
+import wizard.aView.aView_TUI.TextUI.showcard
+import wizard.model.model_TUI.cards.{Card, Color, Value, colorToAnsi, valueToAnsi}
 
 class CardTests extends AnyWordSpec with Matchers {
     "Card" should {

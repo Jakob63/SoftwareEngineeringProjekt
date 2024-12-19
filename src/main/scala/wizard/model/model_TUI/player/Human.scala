@@ -1,7 +1,9 @@
-package wizard.model.player
+package wizard.model.model_TUI.player
 
-import wizard.model.cards.{Card, Color}
+import wizard.model.model_TUI.cards.{Card, Color}
 import scala.util.{Failure, Success, Try}
+
+
 
 class Human private[player](name: String) extends Player(name) {
 

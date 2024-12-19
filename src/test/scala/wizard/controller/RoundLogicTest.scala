@@ -3,13 +3,13 @@ package wizard.controller
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.aView.TextUI
-import wizard.controller.{GameLogic, RoundLogic}
-import wizard.model.cards.*
-import wizard.model.player.{Player, PlayerFactory}
-import wizard.model.rounds.Round
+import wizard.aView.aView_TUI.TextUI
+import wizard.controller.controller_TUI.{ChesterCardState, GameLogic, RoundLogic, WizardCardState}
+import wizard.model.model_TUI.cards.{Card, Color, Hand, Value}
+import wizard.model.model_TUI.player.{Player, PlayerFactory}
 import wizard.testUtils.TestUtil
-import wizard.model.player.PlayerType.Human
+import wizard.model.model_TUI.player.PlayerType.Human
+import wizard.model.model_TUI.rounds.Round
 
 class RoundLogicTest extends AnyWordSpec with Matchers {
     "RoundLogic" should {
