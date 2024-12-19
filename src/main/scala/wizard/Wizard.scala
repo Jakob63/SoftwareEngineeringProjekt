@@ -21,10 +21,8 @@ object Wizard extends JFXApp3 {
         // Start the TUI thread
         Future {
             Thread.sleep(1000)
-            println("Starting TUI thread") // Debugging
             val players = TextUI.inputPlayers()
             val game = new Game(players)
-            println("Starting game") // Debugging
             GameLogic.playGame(game, players)
         }
 

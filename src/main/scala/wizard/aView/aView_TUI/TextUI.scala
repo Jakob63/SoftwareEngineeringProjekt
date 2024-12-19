@@ -28,7 +28,6 @@ object TextUI extends Observable with Observer {
         updateMSG match {
             case "setNumPlayersTUI" =>
                 numPlayers = Some(obj.head.asInstanceOf[Int])
-                println(s"Number of players set in TextUI: ${numPlayers.get}") // Debugging
             case _ =>
                 println(s"Unknown update message: $updateMSG")
         }
