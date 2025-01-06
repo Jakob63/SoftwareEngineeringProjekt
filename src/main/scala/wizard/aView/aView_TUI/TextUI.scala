@@ -2,12 +2,11 @@
 package wizard.aView.aView_TUI
 
 import wizard.actionmanagement.{Observable, Observer}
-import wizard.controller.controller_TUI.GameLogic
 import wizard.model.model_TUI.player.{Player, PlayerFactory}
 import wizard.model.model_TUI.player.PlayerType.Human
 import wizard.undo.{SetPlayerNameCommand, UndoManager}
 import wizard.aView.aView_GUI.StartNodes
-import wizard.aView.aView_TUI.TextUI.observers
+import wizard.model.model_TUI.cards.*
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.*
@@ -22,7 +21,7 @@ object TextUI extends Observable with Observer {
     private var observers: List[Observer] = List(this)
 
     // startnodes als observer
-    addObserver(StartNodes)
+    
 
     override def update(updateMSG: String, obj: Any*): Unit = {
         updateMSG match {
@@ -124,5 +123,26 @@ object TextUI extends Observable with Observer {
 
     def notifyAllObservers(message: String, data: Seq[Any]): Unit = {
         observers.foreach(_.update(message, data: _*))
+    }
+
+    def showcard(card: Card): String = {
+        if (card.value == Value.Ten || card.value == Value.Eleven || card.value == Value.Twelve || card.value == Value.Thirteen) {
+            s"┌─────────┐\n" +
+              s"│ ${colorToAnsi(card.color)}${valueToAnsi(card.value)}${card.value.cardType()}${Console.RESET}      │\n" +
+              s"│         │\n" +
+              s"│         │\n" +
+              s"│         │\n" +
+              s"│      ${colorToAnsi(card.color)}${valueToAnsi(card.value)}${card.value.cardType()}${Console.RESET} │\n" +
+              s"└─────────┘"
+
+        } else {
+            s"┌─────────┐\n" +
+              s"│ ${colorToAnsi(card.color)}${valueToAnsi(card.value)}${card.value.cardType()}${Console.RESET}       │\n" +
+              s"│         │\n" +
+              s"│         │\n" +
+              s"│         │\n" +
+              s"│       ${colorToAnsi(card.color)}${valueToAnsi(card.value)}${card.value.cardType()}${Console.RESET} │\n" +
+              s"└─────────┘"
+        }
     }
 }

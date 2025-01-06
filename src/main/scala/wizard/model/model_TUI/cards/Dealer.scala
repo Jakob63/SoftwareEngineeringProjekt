@@ -3,7 +3,7 @@ package wizard.model.model_TUI.cards
 import scala.collection.mutable.ListBuffer
 import wizard.actionmanagement.Observable
 
-object Dealer extends Observable {
+object Dealer extends Observable with IDealer {
 
     //erstelle eine liste mit allen karten eine karte besteht aus einer color und einem value
     var allCards: List[Card] = {
@@ -19,7 +19,7 @@ object Dealer extends Observable {
     // gib den string der obersten karte in einem println aus
     //println(allCards.head.toString)
     //schreibe eine methode die alle karten in eine zufällige reihenfolge bringt
-    def shuffleCards(): Boolean = {
+    override def shuffleCards(): Boolean = {
         index = 0
         allCards = scala.util.Random.shuffle(allCards)
         true
@@ -28,7 +28,7 @@ object Dealer extends Observable {
     //val shuffledCards = shuffleCards(allCards)
 
     // Methode zum Austeilen der Karten an die Spieler
-    def dealCards(cards_amount: Int, excludeCard: Option[Card] = None): Hand = {
+    override def dealCards(cards_amount: Int, excludeCard: Option[Card] = None): Hand = {
         //shuffleCards()
         val listbuffer = ListBuffer[Card]()
 //        if (index + 1 > 59) {

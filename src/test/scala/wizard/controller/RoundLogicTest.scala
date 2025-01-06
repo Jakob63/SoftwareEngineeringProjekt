@@ -4,7 +4,9 @@ import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
 import wizard.aView.aView_TUI.TextUI
-import wizard.controller.controller_TUI.{ChesterCardState, GameLogic, RoundLogic, WizardCardState}
+import wizard.controller.controller_TUI.base.{GameLogic, RoundLogic}
+import wizard.controller.controller_TUI.mock.Mock_RoundLogic
+import wizard.controller.controller_TUI.{ChesterCardState, IGameLogic, IRoundLogic, WizardCardState}
 import wizard.model.model_TUI.cards.{Card, Color, Hand, Value}
 import wizard.model.model_TUI.player.{Player, PlayerFactory}
 import wizard.testUtils.TestUtil
@@ -12,22 +14,25 @@ import wizard.model.model_TUI.player.PlayerType.Human
 import wizard.model.model_TUI.rounds.Round
 
 class RoundLogicTest extends AnyWordSpec with Matchers {
+    private val gameLogic: IGameLogic = GameLogic
+    private var roundLogic: IRoundLogic = new Mock_RoundLogic
+
     "RoundLogic" should {
 
         "should be valid with 3 to 6 players" in {
-            GameLogic.validGame(3) shouldBe true
+            gameLogic.validGame(3) shouldBe true
         }
 
         "should be invalid if not 3, 4, 5, 6" in {
-            GameLogic.validGame(2) shouldBe false
+            gameLogic.validGame(2) shouldBe false
         }
 
         "should be invalid if the number is negative" in {
-            GameLogic.validGame(-5) shouldBe false
+            gameLogic.validGame(-5) shouldBe false
         }
 
         "should be invalid if the number is 0" in {
-            GameLogic.validGame(0) shouldBe false
+            gameLogic.validGame(0) shouldBe false
         }
 
 //        "correct playRound with 3 players" in {
@@ -36,7 +41,7 @@ class RoundLogicTest extends AnyWordSpec with Matchers {
 //                Player("Player 2"),
 //                Player("Player 3")
 //            )
-//            RoundLogic.playRound(1, players)
+//            roundLogic.playRound(1, players)
 //        }
 
         "correct trickwinner" in {
@@ -53,12 +58,12 @@ class RoundLogicTest extends AnyWordSpec with Matchers {
                 (players(1), players(1).hand.cards.head),
                 (players(2), players(2).hand.cards.head)
             )
-            val winner = RoundLogic.trickwinner(trick, round)
+            val winner = roundLogic.trickwinner(trick, round)
             winner shouldBe players(2) // Adjust the expected winner based on the cards
         }
         "no cards left on Deck should throw exception" in {
             assertThrows[IndexOutOfBoundsException] {
-                RoundLogic.playRound(19, List(PlayerFactory.createPlayer(Some("Player 1"), Human), PlayerFactory.createPlayer(Some("Player 2"), Human), PlayerFactory.createPlayer(Some("Player 3"), Human), PlayerFactory.createPlayer(Some("Player 4"), Human)))
+                roundLogic.playRound(19, List(PlayerFactory.createPlayer(Some("Player 1"), Human), PlayerFactory.createPlayer(Some("Player 2"), Human), PlayerFactory.createPlayer(Some("Player 3"), Human), PlayerFactory.createPlayer(Some("Player 4"), Human)))
             }
         }
         "set ChesterCardState when trump card is Chester" in {

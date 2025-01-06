@@ -1,17 +1,20 @@
-package wizard.controller.controller_TUI
+package wizard.controller.controller_TUI.base
 
 import wizard.aView.aView_TUI.TextUI
 import wizard.aView.aView_TUI.TextUI.showHand
-import wizard.actionmanagement.{Observable, Observer}
-import wizard.controller.controller_TUI.{ChesterCardState, NormalCardState, WizardCardState}
-import wizard.model.model_TUI.cards.{Card, Color, Dealer, Value}
+import wizard.actionmanagement.Observable
+import wizard.controller.controller_TUI.base.PlayerLogic
+import wizard.controller.controller_TUI.*
+import wizard.model.model_TUI.cards.{Card, Dealer, IDealer, Value}
 import wizard.model.model_TUI.player.Player
 import wizard.model.model_TUI.rounds.Round
 
-object RoundLogic extends Observable {
+object RoundLogic extends Observable with IRoundLogic {
+    private val playerlogic: IPlayerLogic = PlayerLogic
+    private val dealer: IDealer = Dealer
     add(TextUI)
 
-    def playRound(currentround: Int, players: List[Player]): Unit = {
+    override def playRound(currentround: Int, players: List[Player]): Unit = {
         val round = new Round(players)
         val trumpCardIndex = currentround * players.length
         val trumpCard = if (trumpCardIndex < Dealer.allCards.length) {
@@ -26,9 +29,9 @@ object RoundLogic extends Observable {
             case _ => round.setState(new NormalCardState)
         }
 
-        Dealer.shuffleCards()
+        dealer.shuffleCards()
         players.foreach { player =>
-            val hand = Dealer.dealCards(currentround, Some(trumpCard))
+            val hand = dealer.dealCards(currentround, Some(trumpCard))
             player.addHand(hand)
         }
         notifyObservers("cards dealt")
@@ -36,7 +39,7 @@ object RoundLogic extends Observable {
 
         round.handleTrump(trumpCard, players)
 
-        players.foreach(player => PlayerLogic.bid(player))
+        players.foreach(player => playerlogic.bid(player))
         for (i <- 1 to currentround) {
             round.leadColor = None
             var trick = List[(Player, Card)]()
@@ -44,7 +47,7 @@ object RoundLogic extends Observable {
 
             while (round.leadColor.isEmpty && firstPlayerIndex < players.length) {
                 val player = players(firstPlayerIndex)
-                val card = PlayerLogic.playCard(None, round.trump, firstPlayerIndex, player)
+                val card = playerlogic.playCard(None, round.trump, firstPlayerIndex, player)
                 if (card.value != Value.WizardKarte && card.value != Value.Chester) {
                     round.leadColor = Some(card.color)
                 }
@@ -54,7 +57,7 @@ object RoundLogic extends Observable {
 
             for (j <- firstPlayerIndex until players.length) {
                 val player = players(j)
-                val card = PlayerLogic.playCard(round.leadColor, round.trump, j, player)
+                val card = playerlogic.playCard(round.leadColor, round.trump, j, player)
                 trick = trick :+ (player, card)
             }
 
@@ -72,13 +75,13 @@ object RoundLogic extends Observable {
             player.addTricks(player.roundTricks)
         })
         players.foreach(player => {
-            PlayerLogic.addPoints(player)
+            playerlogic.addPoints(player)
         })
         notifyObservers("points after round")
         notifyObservers("print points all players", players)
     }
 
-    def trickwinner(trick: List[(Player, Card)], round: Round): Player = {
+    override def trickwinner(trick: List[(Player, Card)], round: Round): Player = {
         val leadColor = trick.head._2.color
         val trump = round.trump
         val leadColorCards = trick.filter(_._2.color == leadColor)

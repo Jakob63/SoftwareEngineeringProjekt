@@ -3,14 +3,18 @@ package wizard.controller
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.shouldBe
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.controller.controller_TUI.PlayerLogic
+import wizard.controller.controller_TUI.IPlayerLogic
+import wizard.controller.controller_TUI.base.RoundLogic.playerlogic
+import wizard.controller.controller_TUI.base.PlayerLogic
 import wizard.model.model_TUI.cards.{Card, Color, Hand, Value}
 import wizard.model.model_TUI.player.PlayerFactory
 import wizard.testUtils.TestUtil
 import wizard.model.model_TUI.player.PlayerType.Human
+import wizard.controller.controller_TUI.mock.Mock_PlayerLogic
 
 class PlayerLogicTests extends AnyWordSpec with Matchers {
-
+    private var playerlogic: IPlayerLogic = new Mock_PlayerLogic
+    
     "PlayerLogic" should {
 
         "play a valid card when an invalid card is attempted first" in {
@@ -19,7 +23,7 @@ class PlayerLogicTests extends AnyWordSpec with Matchers {
             player.addHand(hand)
             var card: Option[Card] = None
             TestUtil.simulateInput("2\n1\n") {
-                card = Some(PlayerLogic.playCard(Some(Color.Red), Some(Color.Blue), 0, player))
+                card = Some(playerlogic.playCard(Some(Color.Red), Some(Color.Blue), 0, player))
             }
             card shouldBe Some(Card(Value.One, Color.Red))
         }
@@ -28,7 +32,7 @@ class PlayerLogicTests extends AnyWordSpec with Matchers {
             val out = new java.io.ByteArrayOutputStream()
             Console.withOut(out) {
                 TestUtil.simulateInput("\n3\n") {
-                    val bid = PlayerLogic.bid(player)
+                    val bid = playerlogic.bid(player)
                     bid shouldBe 3
                 }
             }
@@ -37,7 +41,7 @@ class PlayerLogicTests extends AnyWordSpec with Matchers {
             val player = PlayerFactory.createPlayer(Some("TestPlayer"), Human)
             player.roundBids = 2
             player.roundTricks = 2
-            PlayerLogic.addPoints(player)
+            playerlogic.addPoints(player)
             player.points shouldBe 40
         }
 
@@ -45,7 +49,7 @@ class PlayerLogicTests extends AnyWordSpec with Matchers {
             val player = PlayerFactory.createPlayer(Some("TestPlayer"), Human)
             player.roundBids = 2
             player.roundTricks = 1
-            PlayerLogic.addPoints(player)
+            playerlogic.addPoints(player)
             player.points shouldBe -10
         }
 
@@ -53,7 +57,7 @@ class PlayerLogicTests extends AnyWordSpec with Matchers {
             val player = PlayerFactory.createPlayer(Some("TestPlayer"), Human)
             player.roundBids = 2
             player.roundTricks = 2
-            val points = PlayerLogic.calculatePoints(player)
+            val points = playerlogic.calculatePoints(player)
             points shouldBe 40
         }
 
@@ -61,7 +65,7 @@ class PlayerLogicTests extends AnyWordSpec with Matchers {
             val player = PlayerFactory.createPlayer(Some("TestPlayer"), Human)
             player.roundBids = 2
             player.roundTricks = 1
-            val points = PlayerLogic.calculatePoints(player)
+            val points = playerlogic.calculatePoints(player)
             points shouldBe -10
         }
     }

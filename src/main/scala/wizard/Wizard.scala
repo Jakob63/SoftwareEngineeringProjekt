@@ -6,24 +6,26 @@ import scala.concurrent.Future
 import scalafx.application.JFXApp3
 import scalafx.application.Platform
 import wizard.aView.aView_TUI.TextUI
-import wizard.controller.controller_TUI.GameLogic
+import wizard.controller.controller_TUI.IGameLogic
+import wizard.controller.controller_TUI.base.GameLogic
 import wizard.model.model_TUI.rounds.Game
 
 object Wizard extends JFXApp3 {
-    
+    private val gameLogic: IGameLogic = GameLogic
+
     override def start(): Unit = {
         println("Welcome to Wizard!")
-        GameLogic.add(TextUI)
+        // gameLogic.add(TextUI)
         val gui = new GUI()
-        GameLogic.add(gui)
+        // gameLogic.add(gui)
 
-        
+
         // Start the TUI thread
         Future {
             Thread.sleep(1000)
             val players = TextUI.inputPlayers()
             val game = new Game(players)
-            GameLogic.playGame(game, players)
+            gameLogic.playGame(game, players)
         }
 
         // Start the GUI thread

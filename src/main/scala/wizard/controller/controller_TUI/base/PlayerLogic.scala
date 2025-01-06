@@ -1,14 +1,15 @@
-package wizard.controller.controller_TUI
+package wizard.controller.controller_TUI.base
 
 import wizard.aView.aView_TUI.TextUI
 import wizard.actionmanagement.{Observable, Observer}
+import wizard.controller.controller_TUI.IPlayerLogic
 import wizard.model.model_TUI.cards.{Card, Color, Value}
 import wizard.model.model_TUI.player.Player
 
-object PlayerLogic extends Observable {
+object PlayerLogic extends Observable with IPlayerLogic {
     add(TextUI)
 
-    def playCard(leadColor: Option[Color], trump: Option[Color], currentPlayerIndex: Int, player: Player): Card = {
+    override def playCard(leadColor: Option[Color], trump: Option[Color], currentPlayerIndex: Int, player: Player): Card = {
         notifyObservers("which card", player)
         val cardToPlay = player.playCard(leadColor.orNull, trump.get, currentPlayerIndex)
         if (leadColor.isDefined && cardToPlay.color != leadColor.get && player.hand.hasColor(leadColor.get) && cardToPlay.value != Value.WizardKarte && cardToPlay.value != Value.Chester) {
@@ -20,14 +21,14 @@ object PlayerLogic extends Observable {
         }
     }
 
-    def bid(player: Player): Int = {
+    override def bid(player: Player): Int = {
         notifyObservers("which bid", player)
         val playersbid = player.bid()
         player.roundBids = playersbid
         playersbid
     }
 
-    def addPoints(player: Player): Unit = {
+    override def addPoints(player: Player): Unit = {
         if (player.roundBids == player.roundTricks) {
             player.points += 20 + 10 * player.roundBids
         } else {
@@ -35,7 +36,7 @@ object PlayerLogic extends Observable {
         }
     }
 
-    def calculatePoints(player: Player): Int = {
+    override def calculatePoints(player: Player): Int = {
         val points = player.roundPoints
         val bids = player.roundBids
         val tricks = player.roundTricks
