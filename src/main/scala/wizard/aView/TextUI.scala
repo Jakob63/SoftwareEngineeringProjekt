@@ -1,7 +1,7 @@
 package wizard.aView
 
+import aWizard.model.cards.{Card, Color, Dealer, Value, colorToAnsi, valueToAnsi}
 import wizard.actionmanagement.Observer
-import wizard.model.cards.*
 import wizard.model.player.PlayerType.Human
 import wizard.model.player.{Player, PlayerFactory}
 import wizard.undo.{SetPlayerNameCommand, UndoManager}

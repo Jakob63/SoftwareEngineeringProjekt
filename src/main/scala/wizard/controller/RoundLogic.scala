@@ -1,8 +1,8 @@
 package wizard.controller
 
+import aWizard.model.cards.{Card, Color, Dealer, Value}
 import wizard.aView.TextUI
 import wizard.aView.TextUI.showHand
-import wizard.model.cards.{Card, Color, Dealer, Value}
 import wizard.model.player.Player
 import wizard.model.rounds.Round
 import wizard.actionmanagement.{Observable, Observer}

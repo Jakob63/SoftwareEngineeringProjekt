@@ -1,8 +1,8 @@
 package wizard.controller
 
+import aWizard.model.cards.{Card, Color, Value}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.model.cards.{Card, Color, Value}
 import wizard.model.player.Player
 import wizard.model.player.PlayerFactory
 import wizard.model.player.PlayerType.Human

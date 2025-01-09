@@ -1,6 +1,6 @@
 package wizard.model.rounds
 
-import wizard.model.cards.{Card, Color, Dealer, Value}
+import aWizard.model.cards.{Card, Color, Dealer, Value}
 import wizard.model.player.Player
 
 import scala.compiletime.uninitialized

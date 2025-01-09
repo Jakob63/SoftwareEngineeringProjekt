@@ -1,7 +1,6 @@
 package wizard
 
-
-import wizard.model.cards.Dealer
+import aWizard.model.cards.Dealer
 import wizard.model.rounds.Game
 import wizard.aView.TextUI
 import wizard.controller.GameLogic

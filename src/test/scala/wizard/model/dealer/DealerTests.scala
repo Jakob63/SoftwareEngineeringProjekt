@@ -1,10 +1,10 @@
 package wizard.model.dealer
 
+import aWizard.model.cards.{Color, Dealer, Value}
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
 import wizard.aView.TextUI.{printCardAtIndex, showcard}
-import wizard.model.cards.{Color, Dealer, Value}
 import wizard.model.player.{Player, PlayerFactory}
 import wizard.model.player.PlayerType.Human
 

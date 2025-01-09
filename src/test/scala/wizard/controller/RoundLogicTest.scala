@@ -1,11 +1,11 @@
 package wizard.controller
 
+import aWizard.model.cards.{Card, Color, Hand, Value}
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
 import wizard.aView.TextUI
 import wizard.controller.{GameLogic, RoundLogic}
-import wizard.model.cards.*
 import wizard.model.player.{Player, PlayerFactory}
 import wizard.model.rounds.Round
 import wizard.testUtils.TestUtil

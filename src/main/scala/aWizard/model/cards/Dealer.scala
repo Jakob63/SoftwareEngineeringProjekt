@@ -1,4 +1,4 @@
-package wizard.model.cards
+package aWizard.model.cards
 
 import scala.collection.mutable.ListBuffer
 import wizard.actionmanagement.Observable

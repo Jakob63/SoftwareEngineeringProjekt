@@ -1,4 +1,4 @@
-package wizard.model.cards
+package aWizard.model.cards
 
 enum Color():
     case Red

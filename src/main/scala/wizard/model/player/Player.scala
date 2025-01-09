@@ -1,6 +1,6 @@
 package wizard.model.player
 
-import wizard.model.cards.{Card, Color, Hand}
+import aWizard.model.cards.{Card, Color, Hand}
 import wizard.actionmanagement.{Observable, Observer}
 import wizard.aView.TextUI
 

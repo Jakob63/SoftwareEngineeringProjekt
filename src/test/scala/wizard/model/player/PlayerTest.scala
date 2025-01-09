@@ -1,9 +1,9 @@
 package wizard.model.player
 
+import aWizard.model.cards.Hand
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.model.cards.Hand
 import wizard.model.player.Player
 import wizard.model.player.PlayerFactory
 import wizard.model.player.PlayerType.Human

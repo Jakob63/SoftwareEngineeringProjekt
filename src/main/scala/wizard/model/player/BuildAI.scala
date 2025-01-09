@@ -1,6 +1,6 @@
 package wizard.model.player
 
-import wizard.model.cards.{Card, Color}
+import aWizard.model.cards.{Card, Color}
 
 class BuildAI extends PlayerBuilder {
 
