@@ -1,5 +1,7 @@
 package wizard.model.player
 
+import wizard.model.cards.{Card, Hand}
+
 import scala.compiletime.uninitialized
 
 class BuildHuman extends PlayerBuilder {
@@ -7,11 +9,7 @@ class BuildHuman extends PlayerBuilder {
     private var unfinished: Option[Human] = None
 
     override def setName(name: String): PlayerBuilder = {
-        if (unfinished.isEmpty) {
-            unfinished = Some(Human(name))
-        } else {
-            unfinished.get.name = name
-        }
+      unfinished = Some(Human(name, new Hand(List[Card]()), 0, 0, 0, 0, 0))
         this
     }
 

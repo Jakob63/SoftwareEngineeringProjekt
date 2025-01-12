@@ -2,25 +2,16 @@ package wizard.undo
 
 import wizard.model.player.Player
 
-trait Command {
-    def doStep(): Unit
-    def undoStep(): Unit
-    def redoStep(): Unit
-}
-
 class SetPlayerNameCommand(player: Player, newName: String) extends Command {
     private var oldName: String = player.name
-
+// TODO: stimmt das Janis?
     override def doStep(): Unit = {
-        oldName = player.name
-        player.name = newName
+        // player = player.changeName(newName)
+        new SetPlayerNameCommand(player.changeName(newName), newName)
     }
 
     override def undoStep(): Unit = {
-        player.name = oldName
-    }
-
-    override def redoStep(): Unit = {
-        player.name = newName
+        // player = player.changeName(oldName)
+        new SetPlayerNameCommand(player.changeName(oldName), oldName)
     }
 }

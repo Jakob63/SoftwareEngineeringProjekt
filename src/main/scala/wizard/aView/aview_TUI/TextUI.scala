@@ -1,9 +1,11 @@
-package wizard.aView
+package wizard.aView.aview_TUI
 
 import wizard.actionmanagement.Observer
+import wizard.controller.controller_TUI.GameLogic
 import wizard.model.cards.*
 import wizard.model.player.PlayerType.Human
 import wizard.model.player.{Player, PlayerFactory}
+import wizard.model.rounds.Game
 import wizard.undo.{SetPlayerNameCommand, UndoManager}
 
 import scala.util.{Success, Try}
@@ -11,7 +13,7 @@ import scala.util.{Success, Try}
 object TextUI extends Observer {
     private val undoManager = new UndoManager
 
-    override def update(updateMSG: String, obj: Any*): Any = {
+    override def update(updateMSG: String, obj: Any*): Unit = {
         updateMSG match {
             case "which card" => println(s"${obj.head.asInstanceOf[Player].name}, which card do you want to play?")
             case "invalid card" => println("Invalid card. Please enter a valid index.")
@@ -28,6 +30,18 @@ object TextUI extends Observer {
             case "which trump" => {
                 println(s"${obj.head.asInstanceOf[Player].name}, which color do you want to choose as trump?")
                 scala.io.StdIn.readLine()
+            }
+            case "enter player1" => {
+                println("Player 1 please enter your name: ")
+                val playerName = scala.io.StdIn.readLine()
+                val playersList = obj(0).asInstanceOf[List[Player]]
+                val playerIndex = obj(1).asInstanceOf[Int]
+                val game = obj(2).asInstanceOf[Game]
+
+                val updatedPlayer = playersList(playerIndex).changeName(playerName)
+                val updatedPlayersList = playersList.updated(playerIndex, updatedPlayer)
+
+                GameLogic.enterPlayers(updatedPlayersList, playerIndex + 1, game)
             }
         }
     }

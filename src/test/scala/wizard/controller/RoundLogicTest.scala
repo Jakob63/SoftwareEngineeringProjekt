@@ -3,8 +3,8 @@ package wizard.controller
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.aView.TextUI
-import wizard.controller.{GameLogic, RoundLogic}
+import wizard.aView.aview_TUI.TextUI
+import wizard.controller.controller_TUI.{GameLogic, RoundLogic}
 import wizard.model.cards.*
 import wizard.model.player.{Player, PlayerFactory}
 import wizard.model.rounds.Round

@@ -3,7 +3,7 @@ package wizard.controller
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
-import wizard.controller.GameLogic
+import wizard.controller.controller_TUI.GameLogic
 import wizard.model.player.PlayerType.Human
 import wizard.model.player.{Player, PlayerFactory}
 import wizard.model.rounds.Game

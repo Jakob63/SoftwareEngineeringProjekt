@@ -1,6 +1,6 @@
 package wizard.controller
 
-import wizard.aView.TextUI
+import wizard.aView.aview_TUI.TextUI
 import wizard.actionmanagement.{Observable, Observer}
 import wizard.model.cards.{Card, Color, Value}
 import wizard.model.player.Player
@@ -32,7 +32,7 @@ class WizardCardState extends RoundState {
     }
 
     private def determineTrump(round: Round, players: List[Player]): Unit = {
-        val nextPlayer = players(round.currentPlayerIndex)
+        val nextPlayer = players(round.getCurrentPlayerIndex) // TODO: Janis
         val colorOptions = List(Color.Red, Color.Yellow, Color.Green, Color.Blue)
         val colorCards = colorOptions.map(color => Card(Value.One, color))
 

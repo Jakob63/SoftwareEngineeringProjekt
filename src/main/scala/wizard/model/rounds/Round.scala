@@ -1,66 +1,41 @@
 package wizard.model.rounds
 
+import wizard.aView.aview_TUI.TextUI
 import wizard.model.cards.{Card, Color, Dealer, Value}
 import wizard.model.player.Player
 
 import scala.compiletime.uninitialized
 import wizard.controller.RoundState
-import wizard.aView.TextUI
 import wizard.actionmanagement.Observable
-
-class Round(players: List[Player]) extends Observable {
-    // Aktueller Trumpf
-    var trump: Option[Color] = None
-    var leadColor: Option[Color] = None
-    var currentPlayerIndex = 0
-    private var state: RoundState = _
+// TODO: case class gemacht
+case class Round(players: List[Player], trump: Option[Color], leadColor: Option[Color], state: RoundState, currentPlayerIndex: Int) extends Observable {
 
     add(TextUI) // Added den Observer
 
-    def setTrump(trump: Option[Color]): Unit = {
-        this.trump = trump
+    def withLeadColor(newLeadColor: Option[Color]): Round = {
+        copy(leadColor = newLeadColor)
     }
 
-    def setState(state: RoundState): Unit = {
-        this.state = state
+    def withTrump(newTrump: Option[Color]): Round = {
+        copy(trump = newTrump)
+    }
+    
+    def getCurrentPlayerIndex: Int = currentPlayerIndex
+
+    def setTrump(newTrump: Option[Color]): Round = {
+        new Round(players, newTrump, leadColor, state, currentPlayerIndex)
     }
 
-    def handleTrump(trumpCard: Card, players: List[Player]): Unit = {
-        state.handleTrump(this, trumpCard, players)
+    def setState(newState: RoundState): Round = {
+        new Round(players, trump, leadColor, newState, currentPlayerIndex)
     }
 
-//    def determineTrump(players: List[Player]): Unit = {
-//        for (player <- players) {
-//            val trumpCard = player.hand.cards.find(_.value == Value.WizardKarte)
-//            if (trumpCard.isEmpty) {
-//                val input = TextUI.update("which trump", player).asInstanceOf[String]
-//                setTrump(Some(Color.valueOf(input)))
-//                notifyObservers("print trump card", Card(Value.valueOf(input), Color.valueOf(input)))
-//                return
-//            }
-//        }
-//        setTrump(None)
-//    }
-
-    def nextPlayer(): Player = {
-        val player = players(currentPlayerIndex)
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.length
-        player
+    def handleTrump(newTrumpCard: Card, players: List[Player]): Round = {
+        new Round(players, Some(newTrumpCard.color), leadColor, state, currentPlayerIndex)
     }
 
-    // is game over
-    def isOver(): Boolean = {
-        players.forall(player => player.hand.isEmpty)
-    }
-
-    // finalize round
-    def finalizeRound(): Unit = {
-        players.foreach(player => player.points += player.roundPoints)
-        players.foreach(player => player.tricks += player.roundTricks)
-        players.foreach(player => player.bids += player.roundBids)
-        players.foreach(player => player.roundPoints = 0)
-        players.foreach(player => player.roundTricks = 0)
-        players.foreach(player => player.roundBids = 0)
+    def nextPlayer(): Round = {
+        new Round(players, trump, leadColor, state, (currentPlayerIndex + 1) % players.length)
     }
 
     override def toString: String = {

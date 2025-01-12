@@ -3,12 +3,12 @@ package wizard.model.rounds
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.matchers.should.Matchers.{should, shouldBe}
 import org.scalatest.wordspec.AnyWordSpec
+import wizard.aView.aview_TUI.TextUI
 import wizard.model.cards.{Card, Color, Hand, Value}
 import wizard.model.player.Player
 import wizard.model.rounds.Round
 import wizard.model.player.PlayerType.Human
 import wizard.model.player.PlayerFactory
-import wizard.aView.TextUI
 
 class RoundTest extends AnyWordSpec with Matchers {
     "Round" should {

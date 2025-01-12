@@ -1,18 +1,22 @@
 package wizard.model.cards
 
 case class Hand(cards: List[Card]) {
+    
     // Methode zum Hinzufügen von Karten
     def addCards(newCards: List[Card]): Hand = {
-        Hand(cards ++ newCards)
+        // Hand(cards ++ newCards)
+        new Hand(cards ++ newCards)
     }
     // methode zum removen von Karten
     def removeCard(card: Card): Hand = {
-        Hand(cards.filterNot(_ == card))
+        // Hand(cards.filterNot(_ == card))
+        new Hand(cards.filterNot(_ == card))
     }
     // methode zum suit checken
     def hasColor(color: Color): Boolean = {
         cards.exists(_.color == color)
     }
+
     // methode zum value checken
     def hasValue(value: Value): Boolean = {
         cards.exists(_.value == value)
@@ -26,8 +30,8 @@ case class Hand(cards: List[Card]) {
         cards.isEmpty
     }
     // get card by index
-    def getCard(index: Int): Card = {
-        cards(index)
+    def getCard(index: Int): Hand = {
+        new Hand(cards(index) :: Nil)
     }
 
 }
