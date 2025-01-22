@@ -13,7 +13,7 @@ object GameLogic extends Observable with IGameLogic {
     val gui = new GUI()
     add(gui)
     
-    override def validGame(number: Int): Boolean = {
+    override def validGame(number: 3 | 4 | 5 | 6): Boolean = {
         number >= 3 && number <= 6
     }
 
